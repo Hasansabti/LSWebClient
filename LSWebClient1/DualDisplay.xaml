@@ -1,0 +1,167 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+
+        xmlns:local="clr-namespace:LSWebClient1"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="LSWebClient1.DualDisplay"
+        mc:Ignorable="d"
+        Title="DualDisplay" Height="450" Width="800" WindowStyle="None">
+    <Grid>
+
+        <Grid x:Name="Overlay"  Background="White"   Panel.ZIndex="1000">
+            <Image Margin="50" Source="/alamer4.png" />
+        </Grid>
+        <Grid x:Name="ItemDetails" Background="White" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="131*"/>
+                <RowDefinition Height="200"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="194"/>
+            </Grid.ColumnDefinitions>
+            <dxg:GridControl  Name="gc1"  Grid.ColumnSpan="1" Grid.RowSpan="1">
+                <dxg:GridControl.Columns>
+
+                    <dxg:GridColumn Header="Barcode"
+                                    Visible="False"
+                                    FieldName="barcode"
+                                    Width="50"
+                                    HorizontalHeaderContentAlignment="Left"
+                                    ReadOnly="True">
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Description"
+                                    FieldName="desc2"
+                                    Width="100"
+                                    HorizontalHeaderContentAlignment="Left"
+                                    ReadOnly="True">
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Unit"
+                                    FieldName="unit"
+                                    Visible="False"
+                                    Width="30"
+                                    HorizontalHeaderContentAlignment="Left"
+                                    ReadOnly="True">
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Qty"
+                                    FieldName="qty"
+                                    Width="30"
+                                    HorizontalHeaderContentAlignment="Left"
+                                    ReadOnly="True">
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Price"
+                                    Visible="False"
+                                    FieldName="price"
+                                    Width="30"
+                                    HorizontalHeaderContentAlignment="Left"
+                                    ReadOnly="True">
+                    </dxg:GridColumn>
+                    <dxg:GridColumn Header="Amount"
+                                    FieldName="amount"
+                                    Width="30"
+                                    HorizontalHeaderContentAlignment="Left"
+                                    ReadOnly="True">
+                    </dxg:GridColumn>
+
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.View>
+                    <dxg:TableView 
+                            Name="tv1"
+                            AutoWidth="True"
+                            ShowSearchPanelMode="Never"
+                            ShowAutoFilterRow="False"
+                            ShowSearchPanelCloseButton="True"
+                            ShowSearchPanelFindButton="True"
+                        CanSelectRow="tv1_CanSelectRow"
+                            ShowSearchPanelNavigationButtons="True"
+                            FontSize="20"
+                            AllowSorting="False"
+                            AllowFilterEditor="False"
+                            SearchPanelAllowFilter="False"
+                            ShowFilterPanelMode="Never"
+                            AllowColumnFiltering="False"
+                            ScrollBarAnnotationMode="None"
+                            VerticalScrollbarVisibility="Auto"
+                            ShowGroupPanel="False"
+                            ShowTotalSummary="False"
+                            ShowFixedTotalSummary="False"
+                            SearchPanelPosition="OverGroupPanel"
+                            ShowVerticalLines="False"
+                            ShowIndicator="False"
+                            Style="{StaticResource TableViewStyleDefault}" >
+                        <dxg:TableView.FormatConditions>
+                            <!--<dxg:TopBottomRuleFormatCondition FieldName="Canceled" Rule="TopPercent" Threshold="10" PredefinedFormatName="LightRedFillWithDarkRedText" />-->
+                            <!--<dxg:TopBottomRuleFormatCondition FieldName="UnitPrice" Rule="BelowAverage" PredefinedFormatName="YellowFillWithDarkYellowText" />-->
+                            <!--<dxg:FormatCondition FieldName="Quantity" ValueRule="LessOrEqual" Value1="5" PredefinedFormatName="BoldText" />-->
+                            <!--<dxg:FormatCondition FieldName="Canceled" ValueRule="Equal" Value1="True" PredefinedFormatName="LightRedFillWithDarkRedText" ApplyToRow="True" />-->
+                            <!--<dxg:FormatCondition FieldName="Canceled" ValueRule="Equal" Value1="True" PredefinedFormatName="LightRedFillWithDarkRedText" ApplyToRow="True" />
+                            <dxg:FormatCondition FieldName="Checked" ValueRule="Equal" Value1="True" PredefinedFormatName="GreenText" ApplyToRow="True" />-->
+
+
+
+
+                            <dxg:FormatCondition Expression="Contains([data1], 'VOID')" ApplyToRow="True" FieldName="data1" PredefinedFormatName="TrafficLights3UnrimmedIconSet" >
+                                <dx:Format TextDecorations="Strikethrough" FontStyle="Italic"></dx:Format>
+                            </dxg:FormatCondition>
+
+                            <dxg:FormatCondition FieldName="Status"
+                                                 ValueRule="Equal"
+                                                 Value1="3"
+                                                 ApplyToRow="True">
+                                <dx:Format Background="#FA7878" />
+                            </dxg:FormatCondition>
+
+
+                            <dxg:FormatCondition FieldName="Status"
+                                                 ValueRule="Equal"
+                                                 Value1="4"
+                                                 ApplyToRow="True">
+                                <dx:Format Background="#D2C4FF" />
+                                <!--<dx:Format Background="#9B85E3" />-->
+                            </dxg:FormatCondition>
+
+                            <!--PredefinedFormatName="GreenText"  PredefinedFormatName="RedText"  GreenFillWithDarkGreenText  GreenFillWithDarkGreenText-->
+                            <!--<dxg:FormatCondition Expression="Contains([Country], 'Sw')" PredefinedFormatName="ItalicText" ApplyToRow="True" />-->
+                        </dxg:TableView.FormatConditions>
+                    </dxg:TableView>
+
+                </dxg:GridControl.View>
+
+            </dxg:GridControl>
+
+            <StackPanel Grid.Row="1" >
+                <Grid  HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240*"/>
+                        <ColumnDefinition Width="241*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="10,10,10,10" Style="{StaticResource MaterialDesignHeadline4TextBlock}" >Total</TextBlock>
+                    <TextBlock Name="total"  HorizontalAlignment="Right" Margin="10" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Column="1">100</TextBlock>
+                </Grid>
+                <Grid  HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240*"/>
+                        <ColumnDefinition Width="241*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="10,10,10,10" Style="{StaticResource MaterialDesignHeadline4TextBlock}" >Vat (15%)</TextBlock>
+                    <TextBlock Name="vat"   HorizontalAlignment="Right" Margin="10" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Column="1">100</TextBlock>
+                </Grid>
+                <Grid  HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="240*"/>
+                        <ColumnDefinition Width="241*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="10,10,10,10" Style="{StaticResource MaterialDesignHeadline4TextBlock}" >Balance</TextBlock>
+                    <TextBlock Name="balance"  HorizontalAlignment="Right" Margin="10" Style="{StaticResource MaterialDesignHeadline4TextBlock}" Grid.Column="1">100</TextBlock>
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                <Image Margin="10"  VerticalAlignment="Stretch" HorizontalAlignment="Right" Source="/APP APP.jpg" StretchDirection="DownOnly" />
+            </StackPanel>
+
+        </Grid>
+    </Grid>
+</Window>
